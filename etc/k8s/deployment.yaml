@@ -7,14 +7,14 @@ data:
   camera-gateway-hikvision-1: |-
     {
       "broker_uri": "amqp://rabbitmq.default",
-      "zipkin_url": "http://10.10.2.211:30200",
+      "zipkin_url": "http://zipkin:30200",
       "camera":{
           "id":"5",
           "ip":"10.10.10.5",
           "rtsp_port":554,
           "http_port":80,
-          "username": "admin",
-          "password": "ProjetoAlunos1",
+          "username": "username",
+          "password": "password",
       "stream":{
           "channel_id": 1,
           "stream_id": 1,
