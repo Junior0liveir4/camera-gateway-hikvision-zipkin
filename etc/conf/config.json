@@ -1,0 +1,24 @@
+{
+    "broker_uri": "amqp://10.10.2.30:30000",
+    "zipkin_url": "http://10.10.2.211:30200",
+    "camera":{
+        "id":"5",
+        "ip":"10.10.10.5",
+        "rtsp_port":554,
+        "http_port":80,
+        "username": "admin",
+        "password": "ProjetoAlunos1",
+    "stream":{
+        "channel_id": 1,
+        "stream_id": 1,
+        "compress_standart": "H.264",
+        "width":1920,
+        "height":1080,
+        "fps":60
+    },
+    "image":{
+        "format":"JPEG",
+        "compression":0.8
+    }
+    }
+}

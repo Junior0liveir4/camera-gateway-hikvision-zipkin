@@ -1,0 +1,69 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cfgmap-camera-gateway-hikvision
+  namespace: default
+data:
+  camera-gateway-hikvision-1: |-
+    {
+      "broker_uri": "amqp://rabbitmq.default",
+      "zipkin_url": "http://10.10.2.211:30200",
+      "camera":{
+          "id":"5",
+          "ip":"10.10.10.5",
+          "rtsp_port":554,
+          "http_port":80,
+          "username": "admin",
+          "password": "ProjetoAlunos1",
+      "stream":{
+          "channel_id": 1,
+          "stream_id": 1,
+          "compress_standart": "H.264",
+          "width":1920,
+          "height":1080,
+          "fps":60
+      },
+      "image":{
+          "format":"JPEG",
+          "compression":0.8
+      }
+      }
+    }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "camera-gateway-hikvision-1"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: camera-gateway-hikvision-1
+  template:
+    metadata:
+      labels:
+        app: camera-gateway-hikvision-1
+    spec:
+      hostNetwork: true
+      dnsPolicy: "ClusterFirstWithHostNet"
+      containers:
+        - name: service-cam-gateway
+          image: juniorgui/camera-gateway-hikvision:v1
+          command: ["python"]
+          args: ["service.py", "../etc/conf/options.json"]
+          imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: "1"
+              memory: 512Mi
+          volumeMounts:
+            - name: options
+              mountPath: /opt/hikvision/etc/conf/
+      volumes:
+        - name: options
+          configMap:
+            name: cfgmap-camera-gateway-hikvision
+            items:
+              - key: camera-gateway-hikvision-1
+                path: options.json
+
