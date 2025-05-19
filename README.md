@@ -154,6 +154,6 @@ Essa informação é enviada automaticamente ao Zipkin.
 
 ---
 
-## 📮 Contato
+## 📬 Contato
 
-Para dúvidas ou melhorias, entre em contato com o time do **LabSEA**.
+Para dúvidas ou sugestões, entre em contato com o time do **LabSEA**.
